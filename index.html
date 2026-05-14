@@ -338,6 +338,32 @@
             grid-template-columns: 1fr;
         }
     }
+
+    /* Скрываем мобильную иконку на ПК */
+.mobile-profile-icon {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Настройки для мобильных устройств */
+@media (max-width: 768px) {
+    .mobile-profile-icon {
+        display: block; /* Показываем на мобильных */
+        margin-left: auto; /* Подвинет иконку к кнопке */
+        margin-right: 15px;
+    }
+
+    .btn-header {
+        padding: 8px 12px; /* Чуть уменьшим кнопку, чтобы всё влезло */
+        font-size: 0.75rem;
+    }
+    
+    .logo {
+        flex-shrink: 0;
+    }
+}
+
 </style>
 
 </head>
@@ -346,15 +372,18 @@
     <div class="blob"></div>
     <div class="blob-2"></div>
 
-    <header>
-        <div class="logo" onclick="showPage('home')">BOT.<span>CRAFT</span></div>
-        <nav>
-            <div class="nav-link active" onclick="showPage('home')">Главная</div>
-            <div class="nav-link" onclick="showPage('market')">Маркетплейс</div>
-            <div class="nav-link" onclick="showPage('profile')">Профиль</div>
-        </nav>
-        <button class="btn-header" onclick="openModal()">Начать проект</button>
-    </header>
+
+        <header>
+    <div class="logo" onclick="showPage('home')">BOT.<span>CRAFT</span></div>
+    <nav>
+        <div class="nav-link active" onclick="showPage('home')">Главная</div>
+        <div class="nav-link" onclick="showPage('market')">Маркетплейс</div>
+        <div class="nav-link" onclick="showPage('profile')">Профиль</div>
+    </nav>
+    <div class="mobile-profile-icon" onclick="showPage('profile')">👤</div> <!-- Добавили это -->
+    <div class="mobile-profile-icon" onclick="showPage('profile')"></div> <!-- Иконка профиля для мобильных -->
+    <button class="btn-header" onclick="openModal()">Начать проект</button>
+</header>
 
     <!-- MODAL WINDOW -->
     <div class="modal-overlay" id="projectModal">
