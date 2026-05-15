@@ -1,0 +1,357 @@
+:root {
+        --bg-dark: #0B0F19;
+        --bg-card: rgba(17, 24, 39, 0.7);
+        --accent-purple: #7C3AED;
+        --accent-cyan: #06B6D4;
+        --text-main: #F3F4F6;
+        --text-dim: #9CA3AF;
+        --tg-blue: #24A1DE;
+        --glass-border: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: var(--bg-dark);
+        color: var(--text-main);
+        font-family: 'Inter', sans-serif;
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    /* --- BACKGROUND BLOBS --- */
+    .blob {
+        position: fixed;
+        width: 300px; /* Уменьшено для мобилок */
+        height: 300px;
+        background: radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, rgba(11, 15, 25, 0) 70%);
+        top: -100px;
+        right: -50px;
+        z-index: -1;
+    }
+
+    .blob-2 {
+        position: fixed;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, rgba(11, 15, 25, 0) 70%);
+        bottom: -50px;
+        left: -50px;
+        z-index: -1;
+    }
+
+    /* --- HEADER NAVIGATION --- */
+    header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 15px 20px; /* Уменьшены отступы */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-bottom: 1px solid var(--glass-border);
+        z-index: 1000;
+    }
+
+    .logo {
+        font-size: 1.2rem; /* Чуть меньше на мобильных */
+        font-weight: 800;
+        letter-spacing: -1px;
+        cursor: pointer;
+    }
+
+    .logo span {
+        background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+
+    nav {
+        display: flex;
+        gap: 20px;
+    }
+
+    .nav-link {
+        color: var(--text-dim);
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.3s;
+        cursor: pointer;
+        font-size: 0.9rem;
+    }
+
+    .nav-link:hover, .nav-link.active {
+        color: var(--text-main);
+    }
+
+    .btn-header {
+        background: var(--accent-purple);
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        color: white;
+        text-decoration: none;
+        transition: 0.3s;
+        border: none;
+        cursor: pointer;
+        font-size: 0.85rem;
+    }
+
+    /* --- MAIN CONTENT AREA --- */
+    .content-area {
+        margin-top: 80px;
+        padding: 20px; /* Уменьшено для мобилок */
+        min-height: calc(100vh - 80px);
+    }
+
+    .page {
+        display: none;
+        animation: slideUp 0.6s ease-out;
+    }
+
+    .page.active {
+        display: block;
+    }
+
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- HERO SECTION (HOME) --- */
+    .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .hero-text h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 20px;
+    }
+
+    .hero-text p {
+        color: var(--text-dim);
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        max-width: 550px;
+    }
+
+    /* --- TG MOCKUP --- */
+    .tg-mockup {
+        background: var(--bg-card);
+        border: 1px solid var(--glass-border);
+        border-radius: 28px;
+        height: 400px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        position: relative;
+        width: 100%;
+    }
+
+    .tg-header {
+        padding: 12px;
+        background: rgba(255,255,255,0.03);
+        text-align: center;
+        border-bottom: 1px solid var(--glass-border);
+    }
+
+    .tg-status {
+        font-size: 0.7rem;
+        color: var(--accent-cyan);
+        height: 1rem;
+    }
+
+    .tg-chat {
+        padding: 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        overflow-y: auto;
+    }
+
+    .msg {
+        padding: 10px 14px;
+        border-radius: 16px;
+        max-width: 85%;
+        font-size: 0.9rem;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+    }
+
+    .msg.visible { opacity: 1; transform: translateY(0); }
+    .msg.bot { background: #2D3748; align-self: flex-start; border-bottom-left-radius: 4px; }
+    .msg.user { background: var(--tg-blue); align-self: flex-end; border-bottom-right-radius: 4px; }
+
+    /* --- GLASS CARD & FORMS --- */
+    .glass-card {
+        background: var(--bg-card);
+        border: 1px solid var(--glass-border);
+        padding: 30px 20px;
+        border-radius: 24px;
+        max-width: 800px;
+        margin: 0 auto;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .input-group label {
+        color: var(--text-dim);
+        font-size: 0.85rem;
+        margin-bottom: 5px;
+    }
+
+    .input-group input, .input-group textarea {
+        background: rgba(0,0,0,0.3);
+        border: 1px solid var(--glass-border);
+        padding: 12px;
+        border-radius: 10px;
+        color: white;
+        width: 100%;
+        font-size: 16px; /* Предотвращает зум на iOS */
+    }
+
+    .btn-save {
+        background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+        border: none;
+        padding: 14px;
+        border-radius: 12px;
+        color: white;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    /* --- MODAL --- */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        padding: 15px;
+    }
+
+    .modal-content {
+        background: #161B28;
+        padding: 30px 20px;
+        border-radius: 24px;
+        width: 100%;
+        max-width: 500px;
+        position: relative;
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        color: var(--text-dim);
+        font-size: 1.8rem;
+    }
+
+    /* --- MOBILE RESPONSIVE QUERIES --- */
+    @media (max-width: 768px) {
+        header {
+            padding: 15px;
+        }
+        
+        nav {
+            display: none; /* Прячем обычное меню */
+        }
+
+        .hero-grid {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 30px;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+        }
+
+        .hero-text p {
+            margin: 0 auto 25px;
+        }
+
+        .hero-text div {
+            justify-content: center;
+        }
+
+        .form-grid {
+            grid-template-columns: 1fr; /* Колонки в одну линию */
+        }
+
+        .btn-save {
+            grid-column: span 1;
+        }
+
+        .tg-mockup {
+            height: 350px;
+            max-width: 100%;
+        }
+
+        .content-area {
+            padding: 15px;
+            margin-top: 70px;
+        }
+        
+        /* Фикс для маркета на мобильных */
+        #market .hero-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Скрываем мобильную иконку на ПК */
+.mobile-profile-icon {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Настройки для мобильных устройств */
+@media (max-width: 768px) {
+    .mobile-profile-icon {
+        display: block; /* Показываем на мобильных */
+        margin-left: auto; /* Подвинет иконку к кнопке */
+        margin-right: 15px;
+    }
+
+    .btn-header {
+        padding: 8px 12px; /* Чуть уменьшим кнопку, чтобы всё влезло */
+        font-size: 0.75rem;
+    }
+    
+    .logo {
+        flex-shrink: 0;
+    }
+}
